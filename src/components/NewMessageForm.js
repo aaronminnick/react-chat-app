@@ -6,8 +6,8 @@ function NewMessageForm(props) {
   const firestore = useFirestore();
   const handleNewMessageSubmit = (event) => {
     event.preventDefault();
-
-    return firestore.collection("channels").where(/*channel where id == props.channelId*/).collection("messages").add({
+    //refactor to reduce redundant queries?
+    return firestore.collection("channels").where("id", "==", props.channelId).collection("messages").add({
       content: event.target.message.value,
       timestamp: firestore.FieldValue.serverTimestamp()
       //userId

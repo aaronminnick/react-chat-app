@@ -1,12 +1,12 @@
 import React from 'react';
 
-function MessageItem() {
+function MessageItem(props) {
   return (
     <React.Fragment>
       <div>
-        <p>content</p>
+        <p>{props.message.content}</p>
+      <img src={props.message.avatarImg} alt={`${/*so and so's*/} avatar`} />
       </div>
-      <img src="" alt="" />
     </React.Fragment>
   );
 };
