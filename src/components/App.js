@@ -3,7 +3,7 @@ import ChannelList from './ChannelList';
 import ButtonPane from './ButtonPane';
 import ChatPane from './ChatPane';
 import UserList from './UserList';
-import {Col} from 'react-bootstrap/Col'
+import {Col} from 'react-bootstrap/Col';
 
 function App() {
   return (
