@@ -4,9 +4,9 @@ import ChannelButton from './ChannelButton';
 function ChannelList() {
   return (
     <React.Fragment>
-      {/* */.map(c => 
+      {/* .map(c => 
         <ChannelButton />  
-      )}
+      )*/}
     </React.Fragment>
   );
 }

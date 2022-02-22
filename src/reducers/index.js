@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
-// import messagesReducer from './messagesReducer';
-import {firestoreReducer} from 'react-redux-firebase';
+import channelsReducer from './channelsReducer';
+import {firestoreReducer} from 'redux-firestore';
 
 const reducer = combineReducers({
-  // messages: messagesReducer,
+  channels: channelsReducer,
   firestore: firestoreReducer
 });
 

@@ -5,8 +5,9 @@ import NewMessageForm from './NewMessageForm';
 
 function ChatPane() {
   const currentChannelId = useState(currentChannelId)[0];
+  const firestore = useFirestore();
   const channel = firestore.collection("channels").where("id", "==", currentChannelId);
-  // const messages = channel.collection('messages');
+  // const messages = channel.collection('messages'); //Try this out
   const messages = firestore.collection("channels").where("id", "==", currentChannelId).collection("messages"); // might need to do this as a query to sort by timestamp
   return (
     <React.Fragment>

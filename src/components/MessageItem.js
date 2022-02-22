@@ -5,7 +5,7 @@ function MessageItem(props) {
     <React.Fragment>
       <div>
         <p>{props.message.content}</p>
-      <img src={props.message.avatarImg} alt={`${/*so and so's*/} avatar`} />
+      <img src={props.message.avatarImg} alt={`so and so's avatar`} />
       </div>
     </React.Fragment>
   );

@@ -4,9 +4,9 @@ import UserItem from './UserItem';
 function UserList() {
   return (
     <React.Fragment>
-      {/* */.map(m => 
+      {/* .map(m => 
         <UserItem />
-      )}
+      )*/}
     </React.Fragment>
   );
 };
