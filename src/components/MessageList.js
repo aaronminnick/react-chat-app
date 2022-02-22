@@ -5,7 +5,7 @@ import MessageItem from './MessageItem';
 
 function MessageList(props) {
   
-  useFirestoreConnect({collection: "channels", doc: props.channelId, subcollections: [{collection: "messages"}], storeAs: "currentChannelMessages", orderBy: ["timestamp", "asc"]});
+  useFirestoreConnect({collection: "channels", doc: props.channelId, subcollections: [{collection: "messages"}], storeAs: "currentChannelMessages", orderBy: ["timestamp", "desc"]});
   let messageList = useSelector(state => state.firestore.ordered.currentChannelMessages);
   (isLoaded(messageList)) ?
     messageList = messageList.map(m =>
@@ -13,10 +13,17 @@ function MessageList(props) {
       key={m.id} />) :
     messageList = <p>Loading...</p>;
 
+  const MessageListStyle = {
+    overflowY: "scroll",
+    maxHeight: "90vh",
+    display: "flex",
+    flexDirection: "column-reverse"
+  }
+
   return (
-    <React.Fragment>
+    <div style={MessageListStyle}>
       {messageList}
-    </React.Fragment>
+    </div>
   );
 }
 

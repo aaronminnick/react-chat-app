@@ -3,6 +3,7 @@ import ChannelList from './ChannelList';
 import ButtonPane from './ButtonPane';
 import ChatPane from './ChatPane';
 import UserList from './UserList';
+import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {useFirestore, useFirestoreConnect} from 'react-redux-firebase';
@@ -38,18 +39,20 @@ function App(props) {
 
   return (
     <React.Fragment>
-      <Row>
-        <Col className="col-3">
-          <ChannelList />
-          <ButtonPane />
-        </Col>
-        <Col className="col-6">
-          <ChatPane />
-        </Col>
-        <Col className="col-3">
-          <UserList />
-        </Col>
-      </Row>
+      <Container>
+        <Row>
+          <Col className="col-3">
+            <ChannelList />
+            <ButtonPane />
+          </Col>
+          <Col className="col-6">
+            <ChatPane />
+          </Col>
+          <Col className="col-3">
+            <UserList />
+          </Col>
+        </Row>
+      </Container>
     </React.Fragment>
   );
 }
