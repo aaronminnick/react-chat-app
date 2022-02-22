@@ -5,17 +5,13 @@ import MessageItem from './MessageItem';
 
 function MessageList(props) {
   
-  //this is async
-  useFirestoreConnect({collection: "channels", doc: props.channelId, subcollections: [{collection: "messages"}], storeAs: "currentChannelMessages"});
-
+  useFirestoreConnect({collection: "channels", doc: props.channelId, subcollections: [{collection: "messages"}], storeAs: "currentChannelMessages", orderBy: ["timestamp", "asc"]});
   let messageList = useSelector(state => state.firestore.ordered.currentChannelMessages);
-  console.log(messageList);
   (isLoaded(messageList)) ?
-  messageList = messageList.map(m => 
+    messageList = messageList.map(m =>
       <MessageItem message={m}
-      key={m.id} />
-  ) :
-  messageList = <p>Loading...</p>;
+      key={m.id} />) :
+    messageList = <p>Loading...</p>;
 
   return (
     <React.Fragment>

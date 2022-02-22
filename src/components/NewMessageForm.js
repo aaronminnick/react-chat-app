@@ -7,20 +7,16 @@ function NewMessageForm(props) {
   const firestore = useFirestore();
   const handleNewMessageSubmit = (event) => {
     event.preventDefault();
-
-    // const channels = firestore.collection("channels");
-    // const channel = query(channels, where("__name__", "==", props.channelId));
-
-    // //refactor to reduce redundant queries?
-    // return firestore.collection("channels").doc(channel).collection("messages").add({
-    //   content: event.target.message.value,
-    //   timestamp: firestore.FieldValue.serverTimestamp()
-    //   //userId
-    // });
+    const message = {
+      content: event.target.message.value, 
+      timestamp: firestore.FieldValue.serverTimestamp()
+    };
+    document.getElementById("form").reset();
+    return firestore.collection("channels").doc(props.channelId).collection("messages").add(message);
   }
 
   return (
-    <form onSubmit={handleNewMessageSubmit}>
+    <form id="form" onSubmit={handleNewMessageSubmit}>
       <input type="text" name="message" required />
       <button type="submit">Send</button>
     </form>
