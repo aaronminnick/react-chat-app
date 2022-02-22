@@ -1,22 +1,27 @@
-import React, {useState} from 'react';
-import {useFirestore} from 'react-redux-firebase';
+import React from 'react';
+import {connect} from 'react-redux';
 import MessageList from './MessageList';
 import NewMessageForm from './NewMessageForm';
 
-function ChatPane() {
-  const currentChannelId = useState(currentChannelId)[0];
-  const firestore = useFirestore();
-  const channel = firestore.collection("channels").where("id", "==", currentChannelId);
-  // const messages = channel.collection('messages'); //Try this out
-  const messages = firestore.collection("channels").where("id", "==", currentChannelId).collection("messages"); // might need to do this as a query to sort by timestamp
+function ChatPane(props) {
+
+  console.log("current channel id: " + props.currentChannelId);
+ 
   return (
     <React.Fragment>
-      <h2>{channel.name}</h2>
+      <h2>{null}</h2>
       <button>Rename</button>
-      <MessageList messages={messages} />
-      <NewMessageForm channelId={currentChannelId}/>
+      <MessageList channelId={props.currentChannelId} />
+      <NewMessageForm channelId={props.currentChannelId}/>
     </React.Fragment>
   );
 };
 
-export default NewMessageForm;
+const mapStateToProps = state => {
+  return {
+    currentChannelId: state.channels.currentChannelId,
+  }
+};
+
+ChatPane = connect(mapStateToProps)(ChatPane);
+export default ChatPane;

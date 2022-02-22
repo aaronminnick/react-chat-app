@@ -3,40 +3,53 @@ import ChannelList from './ChannelList';
 import ButtonPane from './ButtonPane';
 import ChatPane from './ChatPane';
 import UserList from './UserList';
+import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {useFirestoreConnect, isEmpty, useFirestore, useFirebase} from 'react-redux-firebase';
+import {useFirestore, useFirestoreConnect} from 'react-redux-firebase';
 import {useSelector, connect} from 'react-redux';
 
+const DEFAULT_CHANNEL_ID = "WNzO78XVlt5MgTVtE4KD";
+
 function App(props) {
-  useFirestoreConnect({collection: "channels"});
-  const firestore = useFirestore();
+  // useFirestoreConnect({collection: "channels"});
+
+
   const {dispatch} = props;
-  // make a default channel if there are no channels
-  firestore.collection("channels").get().then(channels => {
-    if (channels._delegate._snapshot.docChanges.length == 0) {
-      let action = {type: "SET_CURRENT_CHANNEL"};
-      firestore.collection("channels").add({
-        name: "General Discussion"
-      })
-      .then(docRef => {
-        action = {...action, currentChannelId: docRef.id}
-        dispatch(action);
-      });
-    }
-  });
+  dispatch({type: "SET_CURRENT_CHANNEL", currentChannelId: DEFAULT_CHANNEL_ID});
+
+  // const firestore = useFirestore();
+  // // make a default channel if there are no channels
+  // firestore.collection("channels").get().then(channels => {
+  //   let action = {type: "SET_CURRENT_CHANNEL"};
+  //   if (channels._delegate._snapshot.docChanges.length == 0) {
+  //     firestore.collection("channels").add({
+  //       name: "General Discussion"
+  //     })
+  //     .then(docRef => {
+  //       action = {...action, currentChannelId: docRef.id}
+  //       dispatch(action);
+  //     });
+  //   } else {
+  //     console.log(channels._delegate._snapshot.docChanges[0].doc.key.path.segments[6]);
+  //     action = {...action, currentChannelId: "WNzO78XVlt5MgTVtE4KD"}
+  //     dispatch(action);
+  //   }
+  // });
 
   return (
     <React.Fragment>
-      <Col className="col-3">
-        <ChannelList />
-        <ButtonPane />
-      </Col>
-      <Col className="col-6">
-        <ChatPane />
-      </Col>
-      <Col className="col-3">
-        <UserList />
-      </Col>
+      <Row>
+        <Col className="col-3">
+          <ChannelList />
+          <ButtonPane />
+        </Col>
+        <Col className="col-6">
+          <ChatPane />
+        </Col>
+        <Col className="col-3">
+          <UserList />
+        </Col>
+      </Row>
     </React.Fragment>
   );
 }
