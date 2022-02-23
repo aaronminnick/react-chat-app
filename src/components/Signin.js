@@ -1,20 +1,26 @@
 import React from "react";
 import firebase from 'firebase/app';
+import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import {withFirestore} from 'react-redux-firebase';
 
-function Signin() {
+function Signin(props) {
 
   const handleSignUp = (event) => {
     event.preventDefault();
     firebase.auth().createUserWithEmailAndPassword(event.target.email.value, event.target.password.value)
-      .then(() => console.log("successful sign up"))
+      .then(() => console.log(props.firebase.auth()))
       .catch((error) => console.log(error.message)); // replace with feedback to user
   };
 
   const handleSignIn = (event) => {
+    const {dispatch} = props;
     event.preventDefault();
     firebase.auth().signInWithEmailAndPassword(event.target.email.value, event.target.password.value)
-      .then(()=>console.log("successful sign in"))
+      .then(()=> {
+        console.log(props.firebase.auth())
+        dispatch({type: "SET_CURRENT_USER", currentUser: props.firebase.auth().currentUser.email})
+      })
       .catch((error)=> console.log("You suck because of this: " + error.message));
   };
 
@@ -37,4 +43,5 @@ function Signin() {
   );
 };
 
-export default Signin;
+Signin = connect()(Signin);
+export default withFirestore(Signin); //take out wrapper when done troubleshoooting

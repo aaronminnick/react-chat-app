@@ -9,7 +9,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {connect} from 'react-redux';
 import {withFirestore, isLoaded} from 'react-redux-firebase';
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, Link, Navigate} from "react-router-dom";
 
 const DEFAULT_CHANNEL_ID = "WNzO78XVlt5MgTVtE4KD";
 
@@ -19,7 +19,8 @@ function App(props) {
   dispatch({type: "SET_CURRENT_CHANNEL", currentChannelId: DEFAULT_CHANNEL_ID});
 
   const auth = props.firebase.auth();
-  
+  console.log("auth:", auth);
+
   if (!isLoaded(auth)) {
     return (
       <React.Fragment>
@@ -27,7 +28,7 @@ function App(props) {
       </React.Fragment>
     );
   }
-  if (isLoaded(auth) && auth.currentUser == null) {
+  if (isLoaded(auth) && props.currentUser === "") {
     return (
       <Router>
         <Routes>
@@ -37,19 +38,25 @@ function App(props) {
               <Link to="/signin">Sign In</Link>
             </React.Fragment>
           } />
-          <Route path="/signin" element= {
+          <Route path="/signin" element={
             <Signin />
+          } />
+          <Route path="/chat" element={
+            <Navigate replace to="/" />
           } />
         </Routes>
       </Router>
     );
   }
-  if (isLoaded(auth) && auth.currentUser != null) {
+  if (isLoaded(auth) && props.currentUser !== "") {
     return (
       <Router>
         <Routes>
           <Route path="/" element={
-            <Link to="/chat">Go to chat</Link>
+            <Navigate replace to="/chat" />
+          } />
+          <Route path="/signin" element={
+            <Navigate replace to="/chat" />
           } />
           <Route path ="/chat" element={
             <Container>
@@ -67,12 +74,23 @@ function App(props) {
               </Row>
             </Container>
           } />
+          {/* <Route path="/signin" element= {
+            <React.Fragment>
+              <p>currently signed in as {props.currentUser}</p>
+              <Link to="/chat">Go to chat</Link>
+            </React.Fragment>
+          } /> */}
         </Routes>
       </Router>
     );
   }
 }
 
-App = connect()(App);
+const mapStateToProps = state => {
+  return {
+    currentUser: state.users.currentUser
+  }
+}
+App = connect(mapStateToProps)(App);
 
 export default withFirestore(App);
