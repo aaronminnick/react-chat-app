@@ -65,10 +65,10 @@ function App(props) {
                   <ChannelList />
                   <ButtonPane />
                 </Col>
-                <Col className="col-6">
+                <Col className="col-7">
                   <ChatPane />
                 </Col>
-                <Col className="col-3">
+                <Col className="col-2">
                   <UserList />
                 </Col>
               </Row>

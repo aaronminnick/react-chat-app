@@ -17,7 +17,7 @@ function MessageList(props) {
     overflowY: "scroll",
     maxHeight: "90vh",
     display: "flex",
-    flexDirection: "column-reverse"
+    flexDirection: "column-reverse",
   }
 
   return (

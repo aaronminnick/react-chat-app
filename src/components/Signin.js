@@ -18,7 +18,7 @@ function Signin(props) {
     event.preventDefault();
     firebase.auth().signInWithEmailAndPassword(event.target.email.value, event.target.password.value)
       .then(()=> {
-        console.log(props.firebase.auth())
+        console.log(props.firebase.auth().currentUser.email);
         dispatch({type: "SET_CURRENT_USER", currentUser: props.firebase.auth().currentUser.email})
       })
       .catch((error)=> console.log("You suck because of this: " + error.message));
