@@ -61,14 +61,14 @@ function App(props) {
           <Route path ="/chat" element={
             <Container>
               <Row>
-                <Col className="col-3">
+                <Col className="col-4">
                   <ChannelList />
                   <ButtonPane />
                 </Col>
                 <Col className="col-7">
                   <ChatPane />
                 </Col>
-                <Col className="col-2">
+                <Col className="col-1">
                   <UserList />
                 </Col>
               </Row>
