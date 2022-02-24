@@ -1,8 +1,8 @@
 import React from 'react';
 import MessageList from './MessageList';
 import NewMessageForm from './NewMessageForm';
-import {connect} from 'react-redux';
-import {useFirestore, useFirestoreConnect, isLoaded} from 'react-redux-firebase'
+import {connect, useSelector} from 'react-redux';
+import {isLoaded} from 'react-redux-firebase'
 
 function ChatPane(props) {
 
@@ -12,19 +12,12 @@ function ChatPane(props) {
     backgroundAttachment: "fixed",
     backgroundSize: "cover"
   };
-  const firestore = useFirestore();
-  
-  // firestore.collection("channels").where("__name__","==", props.currentChannelId).get()
-  //   .then(value => name = value.);
-  console.log(firestore.collection("channels").where("__name__","==", props.currentChannelId));
-  useFirestoreConnect([
-    {collection: 'channels', doc: props.currentChannelId, storeAs: selectedChannelName}
-  ]);
-  // useFirestoreConnect({collection: "channels", doc: props.currentChannelId, storeAs: "currentChannel"});
 
+  const currentChannel = useSelector(({firestore: {data}}) => data.channels && data.channels[props.currentChannelId]);
+  const currentChannelName = (isLoaded(currentChannel)) ? currentChannel.name : "Loading...";
   return (
     <div style={ChatPaneStyle}>
-      <h2>{props.currentChannelName}</h2>
+      <h2>{currentChannelName}</h2>
       <button>Rename</button>
       <MessageList channelId={props.currentChannelId} />
       <NewMessageForm channelId={props.currentChannelId}/>
@@ -34,8 +27,7 @@ function ChatPane(props) {
 
 const mapStateToProps = state => {
   return {
-    currentChannelId: state.channels.currentChannelId,
-    // currentChannelName: state.firestore.ordered.currentChannel.name
+    currentChannelId: state.channels.currentChannelId
   }
 };
 
