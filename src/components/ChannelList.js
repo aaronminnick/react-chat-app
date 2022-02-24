@@ -10,7 +10,6 @@ function ChannelList(props) {
   let channelList;
   (isLoaded(props.channels)) ?
     channelList = props.channels.map(c =>{
-      console.log(c);
       return <ChannelButton channel={c}
       key={c.id} />;}) :
     channelList = <p>Loading...</p>;

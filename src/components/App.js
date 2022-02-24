@@ -19,7 +19,6 @@ function App(props) {
   dispatch({type: "SET_CURRENT_CHANNEL", currentChannelId: DEFAULT_CHANNEL_ID});
 
   const auth = props.firebase.auth();
-  console.log("auth:", auth);
 
   if (!isLoaded(auth)) {
     return (
