@@ -25,7 +25,7 @@ function ButtonPane(props) {
     );
   }
 
-  const buttonStyles = {
+  const ButtonStyles = {
     button: {
       width: "2em",
       height: "2em",
@@ -60,10 +60,10 @@ function ButtonPane(props) {
   
   return (
     <React.Fragment>
-      <button style={buttonStyles.largerButton} onClick={handleSignOut}>❮▮</button>
-      <form style={buttonStyles.formStyles} id="newChannelForm" onSubmit = {handleAddChannel}>
-        <input style={buttonStyles.inputStyles} name="newChannel" type="text"/>
-        <button style={buttonStyles.button} type="submit">+</button>
+      <button style={ButtonStyles.largerButton} onClick={handleSignOut}>❮▮</button>
+      <form style={ButtonStyles.formStyles} id="newChannelForm" onSubmit = {handleAddChannel}>
+        <input style={ButtonStyles.inputStyles} name="newChannel" type="text"/>
+        <button style={ButtonStyles.button} type="submit">+</button>
       </form>
     </React.Fragment>
   );

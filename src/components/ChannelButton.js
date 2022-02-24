@@ -9,8 +9,17 @@ function ChannelButton(props) {
     dispatch(action);
   };
   
+  const ChannelButtonStyles = {
+    border: "none",
+    borderRadius: "1em",
+    backgroundColor: "rgba(0, 0, 0, .5)",
+    color: "white",
+    fontSize: "1.3em",
+    margin: ".25em"
+  }
+
   return (
-    <button onClick={handleChannelClick}>{props.channel.name}</button>
+    <button style={ChannelButtonStyles} onClick={handleChannelClick}>{props.channel.name}</button>
   );
 };
 

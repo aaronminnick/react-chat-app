@@ -16,7 +16,7 @@ function ChannelList(props) {
     channelList = <p>Loading...</p>;
 
   const ChannelListStyle = {
-    overflowY: "scroll",
+    overflowY: "hidden",
     maxHeight: "90vh",
     display: "flex",
     flexDirection: "column-reverse"
