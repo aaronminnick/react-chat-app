@@ -32,11 +32,8 @@ function App(props) {
     return (
       <Router>
         <Routes>
-          <Route path="/" element={
-            <React.Fragment>
-              <p>try signing in you degenerate</p>
-              <Link to="/signin">Sign In</Link>
-            </React.Fragment>
+        <Route path="/" element={
+            <Navigate replace to="/signin" />
           } />
           <Route path="/signin" element={
             <Signin />
