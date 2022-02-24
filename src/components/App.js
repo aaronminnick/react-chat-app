@@ -74,12 +74,6 @@ function App(props) {
               </Row>
             </Container>
           } />
-          {/* <Route path="/signin" element= {
-            <React.Fragment>
-              <p>currently signed in as {props.currentUser}</p>
-              <Link to="/chat">Go to chat</Link>
-            </React.Fragment>
-          } /> */}
         </Routes>
       </Router>
     );
