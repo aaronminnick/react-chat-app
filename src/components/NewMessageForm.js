@@ -19,7 +19,8 @@ function NewMessageForm(props) {
     form: {
       width: "fit",
       padding: ".5em",
-      backgroundColor: "rgba(0, 0, 0, .5)"
+      backgroundColor: "rgba(0, 0, 0, .5)",
+      borderRadius: "0 0 1em 1em"
     },
     input: {
       width: "90%",

@@ -15,7 +15,7 @@ function MessageList(props) {
 
   const MessageListStyle = {
     overflowY: "scroll",
-    maxHeight: "90vh",
+    height: "calc(88vh - 4em)",
     display: "flex",
     flexDirection: "column-reverse",
   }
